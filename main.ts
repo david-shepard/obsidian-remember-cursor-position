@@ -30,11 +30,11 @@ interface EphemeralState {
 
 
 export default class RememberCursorPosition extends Plugin {
-	settings: PluginSettings;
-	db: { [file_path: string]: EphemeralState };
-	lastSavedDb: { [file_path: string]: EphemeralState };
-	lastEphemeralState: EphemeralState;
-	lastLoadedFileName: string;
+	settings!: PluginSettings;
+	db!: { [file_path: string]: EphemeralState };
+	lastSavedDb!: { [file_path: string]: EphemeralState };
+	lastEphemeralState!: EphemeralState;
+	lastLoadedFileName!: string;
 	loadedLeafIdList: string[] = [];
 	loadingFile = false;
 
@@ -110,7 +110,7 @@ export default class RememberCursorPosition extends Plugin {
 		if (!this.lastEphemeralState)
 			this.lastEphemeralState = st;
 
-		if (!isNaN(st.scroll) && !this.isEphemeralStatesEquals(st, this.lastEphemeralState)) {
+		if (st.scroll !== undefined && !isNaN(st.scroll) && !this.isEphemeralStatesEquals(st, this.lastEphemeralState)) {
 			this.saveEphemeralState(st);
 			this.lastEphemeralState = st;
 		}
@@ -123,7 +123,7 @@ export default class RememberCursorPosition extends Plugin {
 		if (!state1.cursor && state2.cursor)
 			return false;
 
-		if (state1.cursor) {
+		if (state1.cursor && state2.cursor) {
 			if (state1.cursor.from.ch != state2.cursor.from.ch)
 				return false;
 			if (state1.cursor.from.line != state2.cursor.from.line)
@@ -155,7 +155,7 @@ export default class RememberCursorPosition extends Plugin {
 	}
 
 
-	async restoreEphemeralState(file?: TFile) {
+	async restoreEphemeralState(file?: TFile | null) {
 		let fileName = this.app.workspace.getActiveFile()?.path;
 
 		if (fileName && this.loadingFile && this.lastLoadedFileName == fileName) //if already started loading
@@ -178,13 +178,14 @@ export default class RememberCursorPosition extends Plugin {
 
 		if (this.lastLoadedFileName != fileName) {
 			this.lastEphemeralState = {}
-			this.lastLoadedFileName = fileName;
+			this.lastLoadedFileName = fileName ?? '';
 			
-			let st:EphemeralState
+			let st: EphemeralState = {};
 
 			if (fileName) {
-				st = this.db[fileName];
-				if (st) {
+				const saved = this.db[fileName];
+				if (saved) {
+					st = saved;
 					//waiting for load note
 					await this.delay(this.settings.delayAfterFileOpening)
 
@@ -277,7 +278,7 @@ export default class RememberCursorPosition extends Plugin {
 		}
 	}
 
-	private getEditor(): Editor {
+	private getEditor(): Editor | undefined {
 		return this.app.workspace.getActiveViewOfType(MarkdownView)?.editor;
 	}
 
