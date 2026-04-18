@@ -17,9 +17,13 @@ It works in edit and preview mode.
 > * Usage of a large object instead of a `Map()`
 > * Writing a large JSON object every file change
 
+
+
 **Action items** 
 
 > I recommend: Storing all the files in `IndexedDB` instead of a `.json` file, adding a debounce after typing has finished, and only save the state when edits have finished.
+
+
 
 - [ ] Only poll when file has finished editing
 - [ ] Use `IndexedDB` (found very useful IndexedDB-based [obsidian lib]((https://github.com/Fevol/obsidian-database-library)) created by @Fevol
@@ -27,3 +31,14 @@ It works in edit and preview mode.
 ## Additional dependencies
 
 - [Fevol/obsidian-database-library: A tiny library for creating persistent IndexedDB databases for usage in the development of Obsidian plugins](https://github.com/Fevol/obsidian-database-library)
+
+
+
+### Links
+
+- [r/ObsidianMD - "Remember Cursor position" plugin makes Obsidian very laggy when I scroll up or down](https://www.reddit.com/r/ObsidianMD/comments/1hk7um5/remember_cursor_position_plugin_makes_obsidian/) (original reddit thread)
+- [Obsidian slows down when using the plugin · Issue #70 · dy-sh/obsidian-remember-cursor-position](https://github.com/dy-sh/obsidian-remember-cursor-position/issues/70) (impetus for this fork)
+
+
+- [Home - Obsidian Developer Documentation](https://docs.obsidian.md/Home)
+- [ludovicchabant/obsidian-remember-file-state: A plugin for Obsidian that remembers cursor position, selection, scrolling, and more for each file.](https://github.com/ludovicchabant/obsidian-remember-file-state#developer-quickstart)
