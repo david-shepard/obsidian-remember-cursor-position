@@ -6,4 +6,24 @@ The cursor position, scrolling and text selection  for all notes are stored in a
 
 It works in edit and preview mode.
 
+---
 
+## TODO as per [@Thundercraft5 excellent suggestions](https://github.com/dy-sh/obsidian-remember-cursor-position/issues/70#issuecomment-2822711458)
+
+**Issues**
+
+> * Constant polling for changes
+> * Expensive comparison of stringified JSON
+> * Usage of a large object instead of a `Map()`
+> * Writing a large JSON object every file change
+
+**Action items** 
+
+> I recommend: Storing all the files in `IndexedDB` instead of a `.json` file, adding a debounce after typing has finished, and only save the state when edits have finished.
+
+- [ ] Only poll when file has finished editing
+- [ ] Use `IndexedDB` (found very useful IndexedDB-based [obsidian lib]((https://github.com/Fevol/obsidian-database-library)) created by @Fevol
+
+## Additional dependencies
+
+- [Fevol/obsidian-database-library: A tiny library for creating persistent IndexedDB databases for usage in the development of Obsidian plugins](https://github.com/Fevol/obsidian-database-library)
