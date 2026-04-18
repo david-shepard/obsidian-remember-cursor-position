@@ -15,10 +15,17 @@
     "@rollup/plugin-commonjs": "^29.0.2",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-typescript": "^12.3.0",
-    "@types/node": "^14.14.2",
-    "obsidian": "https://github.com/obsidianmd/obsidian-api/tarball/master",
+    "@types/node": "^16.11.6",
     "rollup": "^4.60.1",
     "tslib": "^2.8.1",
-    "typescript": "^6.0.2"
+    "typescript": "~5.8.3",
+    "typescript-eslint": "8.35.1",
+    "eslint-plugin-obsidianmd": "0.2.3"
+  },
+  "dependencies": {
+    "localforage": "^1.10.0",
+    "localforage-getitems": "https://github.com/conversejs/localForage-getItems/tree/master",
+    "localforage-setitems": "^1.4.0",
+    "obsidian": "latest"
   }
 }
